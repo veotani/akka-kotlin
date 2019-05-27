@@ -1,5 +1,6 @@
 import java.io.File
 import java.math.BigInteger
+import kotlin.system.measureNanoTime
 
 class SuccesiveSimpleMultipliersCounter {
 
@@ -35,5 +36,16 @@ class SuccesiveSimpleMultipliersCounter {
         for (line in lines)
             countSimpleMultipliers += countSimpleMultipliers(BigInteger(line))
         return countSimpleMultipliers
+    }
+
+    fun main() {
+        var simpleMultipliersCount = BigInteger.ZERO
+        var elapsedTime = measureNanoTime {
+            simpleMultipliersCount = SuccesiveSimpleMultipliersCounter().processNumbers()
+        }
+
+        elapsedTime /= with(1e9) { toInt() }
+        var reportFile = File("simple_mul.txt")
+        reportFile.writeText("Time taken: $elapsedTime\nMultipliers found: $simpleMultipliersCount")
     }
 }

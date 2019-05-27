@@ -1,5 +1,6 @@
 import java.io.File
 import java.math.BigInteger
+import kotlin.system.measureNanoTime
 
 class ConcurrencyPrimitivesMultipliersCounter {
 
@@ -38,5 +39,17 @@ class ConcurrencyPrimitivesMultipliersCounter {
             thread.join()
 
         return result
+    }
+
+    fun main() {
+        var concurrentMultipliersCount = BigInteger.ZERO
+        var counter = ConcurrencyPrimitivesMultipliersCounter()
+        var elapsedTime = measureNanoTime {
+            concurrentMultipliersCount = counter.processNumbers()
+        }
+
+        elapsedTime /= with(1e9) { toInt() }
+        var reportFile = File("primitives_mul.txt")
+        reportFile.writeText("Time taken: $elapsedTime\nMultipliers found: $concurrentMultipliersCount")
     }
 }

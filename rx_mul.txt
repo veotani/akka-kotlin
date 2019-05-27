@@ -1,0 +1,2 @@
+Time taken: 401
+Multipliers found: 423

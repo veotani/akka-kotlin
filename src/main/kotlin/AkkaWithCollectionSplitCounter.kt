@@ -44,7 +44,7 @@ class MasterSeparateActor : AbstractActor() {
             totalMultipliers += cr.result
             finishedWorkers++
             if (finishedWorkers == NUM_OF_WORKERS) {
-                val totalTime = System.currentTimeMillis() - timeStarted
+                val totalTime = (System.currentTimeMillis() - timeStarted)/1000
                 var reportFile = File("akka_mul.txt")
                 reportFile.writeText("Time taken: $totalTime\nMultipliers found: $totalMultipliers")
                 context.system.terminate()
@@ -71,13 +71,15 @@ class CounterSeparateActor : AbstractActor() {
         .build()
 }
 
-fun main() {
-    // Create actor system
-    val actorSystem = ActorSystem.create("test-system")
-    // Create master actor
-    val actorRef = actorSystem.actorOf(Props.create(MasterSeparateActor::class.java))
-    // Send him some random message so he starts
-    actorRef.tell("", actorRef)
+class AkkaWithCollectionSplitCounter {
+    fun main() {
+        // Create actor system
+        val actorSystem = ActorSystem.create("test-system")
+        // Create master actor
+        val actorRef = actorSystem.actorOf(Props.create(MasterSeparateActor::class.java))
+        // Send him some random message so he starts
+        actorRef.tell("", actorRef)
+    }
 }
 
 

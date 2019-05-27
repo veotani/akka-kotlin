@@ -7,10 +7,10 @@ class RandomNumberGenerator {
         return BigInteger(64, java.util.Random())
     }
 
-    fun write2000RandomNumbers() {
+    fun writeAllRandomNumbers() {
         var file = File("numbers.txt")
         file.printWriter().use {
-            for (_i in 0 until 100)
+            for (_i in 0 until 1000)
                 it.println(generateRandomNumber())
         }
     }

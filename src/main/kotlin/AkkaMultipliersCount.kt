@@ -72,14 +72,14 @@ class CounterActor : AbstractActor() {
         .build()!!
 }
 
-fun main() {
-    val file = File("numbers.txt")
-
-
-    // Create actor system
-    val actorSystem = ActorSystem.create("test-system")
-    // Create master actor
-    val actorRef = actorSystem.actorOf(Props.create(MasterActor::class.java))
-    // Send him some random message so he starts
-    actorRef.tell(file, actorRef)
+class AkkaMultipliersCount {
+    fun main() {
+        val file = File("numbers.txt")
+        // Create actor system
+        val actorSystem = ActorSystem.create("test-system")
+        // Create master actor
+        val actorRef = actorSystem.actorOf(Props.create(MasterActor::class.java))
+        // Send him some random message so he starts
+        actorRef.tell(file, actorRef)
+    }
 }
